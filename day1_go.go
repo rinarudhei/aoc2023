@@ -18,32 +18,24 @@ func main() {
 
     lines := splitText(string(text), "\n")
 
-    var sum int
+    s := sum()
     for _, line := range lines {
-        re := regexp.MustCompile("[0-9]")
-        numString := re.FindAllString(line, -1)
-        if numString != nil {
-            fmt.Println(numString)
-            c, _ := getNumber(numString)
-            sum += c
-            fmt.Printf("check c: %v, sum: %v \n", c, sum)
-        }
+        s(line)
     }
 }
 
-//func sum() func(line string) int {
-//    var sum int
-//    return func(line string) int {
-//        re := regexp.MustCompile("[0-9]")
-//        numString := re.FindAllString(line, -1)
-//        if numString != nil {
-//            c, _ := getNumber(numString)
-//            sum += c
-//        }
-//
-//        return sum
-//    }
-//}
+func sum() func(line string) {
+    var total int
+    re := regexp.MustCompile("[0-9]")
+    return func(line string) {
+        numString := re.FindAllString(line, -1)
+        if numString != nil {
+            c, _ := getNumber(numString)
+            total += c
+        }
+        fmt.Printf("check total: %v \n", total)
+    }
+}
 
 func getNumber(numString []string) (int, error) {
     calibrationValue := string(numString[0])+string(numString[len(numString)-1])
