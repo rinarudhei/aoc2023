@@ -24,7 +24,7 @@ func main() {
     }
 }
 
-func Sum() func(line string) int{
+func Sum() func(line string) int {
     var total int
     reFirst := regexp.MustCompile("([0-9]|one|two|three|four|five|six|seven|eight|nine)")
     reLast := regexp.MustCompile("([0-9]|eno|owt|eerht|ruof|evif|xis|neves|thgie|enin)")
